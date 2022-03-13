@@ -1,0 +1,38 @@
+apiVersion: v1
+data:
+  loadBalancerScheme: internet-facing
+kind: ConfigMap
+metadata:
+  labels:
+    kustomize.component: istio-ingress
+  name: istio-ingress-parameters
+  namespace: istio-system
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig":
+      { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:307915334735:certificate/a1148c28-d928-45d4-9e08-a3eeb6861f4a
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/success-codes: 200,302
+    external-dns.alpha.kubernetes.io/hostname: platforminnovation.net
+    kubernetes.io/ingress.class: alb
+  labels:
+    kustomize.component: istio-ingress
+  name: istio-ingress
+  namespace: istio-system
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          serviceName: ssl-redirect
+          servicePort: use-annotation
+        path: /*
+      - backend:
+          serviceName: istio-ingressgateway
+          servicePort: 80
+        path: /*

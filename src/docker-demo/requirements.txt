@@ -1,0 +1,7 @@
+pandas
+matplotlib
+streamlit
+# streamlit_pandas_profiling
+numpy
+scikit-learn
+fire
