@@ -118,4 +118,4 @@
     kubectl delete -k example
 
 ## Tear down clusters
-    eksctl delete cluster --name eksworkshop-eksctl
+    eksctl delete cluster --region=us-east-1 --name=eksworkshop-eksctl
