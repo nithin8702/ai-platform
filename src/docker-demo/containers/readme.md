@@ -47,5 +47,12 @@
     # docker system prune -a
     # docker rm -vf $(docker ps -a -q)
     # docker rmi -f $(docker images -a -q)
+
+
+## Deploy into ECR
+    aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 807582834527.dkr.ecr.us-east-1.amazonaws.com
+    docker build -t mushroomclassifier .
+    docker tag mushroomclassifier:latest 807582834527.dkr.ecr.us-east-1.amazonaws.com/mushroomclassifier:latest
+    docker push 807582834527.dkr.ecr.us-east-1.amazonaws.com/mushroomclassifier:latest
     
 

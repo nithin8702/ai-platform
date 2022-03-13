@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mushroomclassifier-deployment
+  labels:
+    app: mushroomclassifier
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mushroomclassifier
+  template:
+    metadata:
+      labels:
+        app: mushroomclassifier
+    spec:
+      containers:
+      - name: mushroomclassifier
+        image: 807582834527.dkr.ecr.us-east-1.amazonaws.com/mushroomclassifier:latest
+        ports:
+        - containerPort: 8501
