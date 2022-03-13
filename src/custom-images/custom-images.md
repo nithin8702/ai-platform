@@ -1,15 +1,15 @@
 ## 1. Retrieve an authentication token and authenticate your Docker client to your registry.
     Use the AWS CL
-    aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 307915334735.dkr.ecr.us-east-1.amazonaws.com
+    aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 807582834527.dkr.ecr.us-east-1.amazonaws.com
 
 ## 2. Build your Docker image using the following command.
     docker build -t test1 .
 
 ## 3. After the build completes, tag your image so you can push the image to this repository
-    docker tag test1:latest 307915334735.dkr.ecr.us-east-1.amazonaws.com/test1:latest
+    docker tag test1:latest 807582834527.dkr.ecr.us-east-1.amazonaws.com/test1:latest
 
 ## 4. Run the following command to push this image to your newly created AWS repository
-    docker push 307915334735.dkr.ecr.us-east-1.amazonaws.com/test1:latest
+    docker push 807582834527.dkr.ecr.us-east-1.amazonaws.com/test1:latest
 
 
 ## Trouble Shooting

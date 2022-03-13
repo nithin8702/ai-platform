@@ -75,19 +75,19 @@ Distributed under the MIT License. See ``LICENSE.md`` for more information.
 
 
 
-aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 307915334735.dkr.ecr.us-east-1.amazonaws.com
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 807582834527.dkr.ecr.us-east-1.amazonaws.com
+
+docker build . -t 807582834527.dkr.ecr.us-east-1.amazonaws.com/only-tests:download_data_v3
+docker push 807582834527.dkr.ecr.us-east-1.amazonaws.com/only-tests:download_data_v3
 
 
-docker build . -t 307915334735.dkr.ecr.us-east-1.amazonaws.com/only-tests:download_data_v3
-docker push 307915334735.dkr.ecr.us-east-1.amazonaws.com/only-tests:download_data_v3
+docker build . -t 807582834527.dkr.ecr.us-east-1.amazonaws.com/only-tests:decision_tree_v3
+docker push 807582834527.dkr.ecr.us-east-1.amazonaws.com/only-tests:decision_tree_v3
 
 
-docker build . -t 307915334735.dkr.ecr.us-east-1.amazonaws.com/only-tests:decision_tree_v3
-docker push 307915334735.dkr.ecr.us-east-1.amazonaws.com/only-tests:decision_tree_v3
-
-
-docker build . -t 307915334735.dkr.ecr.us-east-1.amazonaws.com/only-tests:logistic_regression_v2
-docker push 307915334735.dkr.ecr.us-east-1.amazonaws.com/only-tests:logistic_regression_v2
+docker build . -t 807582834527.dkr.ecr.us-east-1.amazonaws.com/only-tests:logistic_regression_v2
+docker push 807582834527.dkr.ecr.us-east-1.amazonaws.com/only-tests:logistic_regression_v2
 
 If pipelines secret not found then create it by
-kubectl get secret mlpipeline-minio-artifact --namespace=kubeflow -o yaml | sed 's/namespace: kubeflow/namespace: kubeflow-user-example-com/' | kubectl create -f -
+    kubectl get secrets -n kubeflow-user-example-com
+    kubectl get secret mlpipeline-minio-artifact --namespace=kubeflow -o yaml | sed 's/namespace: kubeflow/namespace: kubeflow-user-example-com/' | kubectl create -f -

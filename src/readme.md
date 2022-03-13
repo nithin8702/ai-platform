@@ -95,7 +95,25 @@
 ## Kubeflow UI
     kubectl port-forward svc/istio-ingressgateway -n istio-system 8080:80
 
+## Ingress
+    https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html
+        kubernetes.io/cluster/eksworkshop-eksctl shared
+        kubernetes.io/role/elb 1
+    Attach 2 roles eksctl-eksworkshop-eksctl-nodegro-NodeInstanceRole-
+        roles/iam_alb_ingress_policy.json
+        roles/iam_profile_controller_policy.json
+    kubectl apply -f alb.yaml
+    kubectl apply -f ingress.yaml
+    kubectl get svc/istio-ingressgateway -n istio-system
+
+    Check the logs
+        kubectl -n kubeflow logs $(kubectl get pods -n kubeflow --selector=app.kubernetes.io/name=alb-ingress-controller --output=jsonpath={.items..metadata.name})
+
 ## Tear down kubeflow
+    kubectl delete -f ingress.yaml
+    kubectl delete -f alb.yaml
+    Detach 2 roles in eksctl-eksworkshop-eksctl-nodegro-NodeInstanceRole-
+
     cd manifests
     kubectl delete -k example
 

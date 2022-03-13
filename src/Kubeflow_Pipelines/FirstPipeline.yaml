@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
   generateName: first-pipeline-
-  annotations: {pipelines.kubeflow.org/kfp_sdk_version: 1.8.11, pipelines.kubeflow.org/pipeline_compilation_time: '2022-03-11T22:10:18.860272',
+  annotations: {pipelines.kubeflow.org/kfp_sdk_version: 1.8.11, pipelines.kubeflow.org/pipeline_compilation_time: '2022-03-13T20:26:09.775283',
     pipelines.kubeflow.org/pipeline_spec: '{"description": "Applies Decision Tree
       and Logistic Regression for classification problem.", "name": "First Pipeline"}'}
   labels: {pipelines.kubeflow.org/kfp_sdk_version: 1.8.11}
@@ -14,7 +14,7 @@ spec:
       args: []
       command: [python, decision_tree.py, --data, /tmp/inputs/Data/data, --accuracy,
         /tmp/outputs/Accuracy/data]
-      image: 307915334735.dkr.ecr.us-east-1.amazonaws.com/only-tests:decision_tree_v3
+      image: 807582834527.dkr.ecr.us-east-1.amazonaws.com/only-tests:decision_tree_v3
     inputs:
       artifacts:
       - {name: download-data-function-Data, path: /tmp/inputs/Data/data}
@@ -32,17 +32,17 @@ spec:
       annotations: {pipelines.kubeflow.org/component_spec: '{"description": "Trains
           a  decision tree classifier", "implementation": {"container": {"command":
           ["python", "decision_tree.py", "--data", {"inputPath": "Data"}, "--accuracy",
-          {"outputPath": "Accuracy"}], "image": "307915334735.dkr.ecr.us-east-1.amazonaws.com/only-tests:decision_tree_v3"}},
+          {"outputPath": "Accuracy"}], "image": "807582834527.dkr.ecr.us-east-1.amazonaws.com/only-tests:decision_tree_v3"}},
           "inputs": [{"description": "Path where data is stored.", "name": "Data",
           "type": "LocalPath"}], "name": "Decision Tree classifier", "outputs": [{"description":
           "Accuracy metric", "name": "Accuracy", "type": "Float"}]}', pipelines.kubeflow.org/component_ref: '{"digest":
-          "4995297ec0de1e240098b139a264eb026a5e6d193737533a33a75681f0d72c39", "url":
+          "08809d3518ce7a949e995eabdff66f1c0a2432f929b6715ae94646beb3d504e7", "url":
           "decision_tree/decision_tree.yaml"}'}
   - name: download-data-function
     container:
       args: []
       command: [python, download_data.py, --data, /tmp/outputs/Data/data]
-      image: 307915334735.dkr.ecr.us-east-1.amazonaws.com/only-tests:download_data_v3
+      image: 807582834527.dkr.ecr.us-east-1.amazonaws.com/only-tests:download_data_v3
     outputs:
       artifacts:
       - {name: download-data-function-Data, path: /tmp/outputs/Data/data}
@@ -54,10 +54,10 @@ spec:
       annotations: {pipelines.kubeflow.org/component_spec: '{"description": "Download
           toy data from sklearn datasets", "implementation": {"container": {"command":
           ["python", "download_data.py", "--data", {"outputPath": "Data"}], "image":
-          "307915334735.dkr.ecr.us-east-1.amazonaws.com/only-tests:download_data_v3"}},
+          "807582834527.dkr.ecr.us-east-1.amazonaws.com/only-tests:download_data_v3"}},
           "name": "Download Data Function", "outputs": [{"description": "Path where
           data will be stored.", "name": "Data", "type": "LocalPath"}]}', pipelines.kubeflow.org/component_ref: '{"digest":
-          "4125046563d6c2fafcb0fa117f84deab3541927dba6172d2727489a2b1b5221b", "url":
+          "22c1903036b0336d6a064e2b8d89e688c4912fc73d0247c1664a94c9a4efebc9", "url":
           "download_data/download_data.yaml"}'}
   - name: first-pipeline
     dag:
@@ -87,7 +87,7 @@ spec:
       args: []
       command: [python, logistic_regression.py, --data, /tmp/inputs/Data/data, --accuracy,
         /tmp/outputs/Accuracy/data]
-      image: 307915334735.dkr.ecr.us-east-1.amazonaws.com/only-tests:logistic_regression_v2
+      image: 807582834527.dkr.ecr.us-east-1.amazonaws.com/only-tests:logistic_regression_v2
     inputs:
       artifacts:
       - {name: download-data-function-Data, path: /tmp/inputs/Data/data}
@@ -105,11 +105,11 @@ spec:
       annotations: {pipelines.kubeflow.org/component_spec: '{"description": "Trains
           a Logistic Regression Classifier", "implementation": {"container": {"command":
           ["python", "logistic_regression.py", "--data", {"inputPath": "Data"}, "--accuracy",
-          {"outputPath": "Accuracy"}], "image": "307915334735.dkr.ecr.us-east-1.amazonaws.com/only-tests:logistic_regression_v2"}},
+          {"outputPath": "Accuracy"}], "image": "807582834527.dkr.ecr.us-east-1.amazonaws.com/only-tests:logistic_regression_v2"}},
           "inputs": [{"description": "Path where data is stored.", "name": "Data",
           "type": "LocalPath"}], "name": "Logistic Regression Classifier", "outputs":
           [{"description": "Accuracy metric", "name": "Accuracy", "type": "Float"}]}',
-        pipelines.kubeflow.org/component_ref: '{"digest": "eb1ff1acb58055b45dce732d2a74040a64bdf902564f0367c385105a11e1b12c",
+        pipelines.kubeflow.org/component_ref: '{"digest": "e240c9c8e74bb953244b5a5392bf1db803a86f9e00e0156014841014131903de",
           "url": "logistic_regression/logistic_regression.yaml"}'}
   - name: show-results
     container:

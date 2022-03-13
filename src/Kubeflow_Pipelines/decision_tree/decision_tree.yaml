@@ -8,7 +8,7 @@ outputs:
 
 implementation:
   container:
-    image: 307915334735.dkr.ecr.us-east-1.amazonaws.com/only-tests:decision_tree_v3
+    image: 807582834527.dkr.ecr.us-east-1.amazonaws.com/only-tests:decision_tree_v3
     command: [
       python, decision_tree.py,
 
