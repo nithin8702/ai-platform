@@ -102,6 +102,7 @@
     Attach 2 roles eksctl-eksworkshop-eksctl-nodegro-NodeInstanceRole-
         roles/iam_alb_ingress_policy.json
         roles/iam_profile_controller_policy.json
+    Change VPC Id in alb.yaml
     kubectl apply -f alb.yaml
     kubectl apply -f ingress.yaml
     kubectl get svc/istio-ingressgateway -n istio-system
