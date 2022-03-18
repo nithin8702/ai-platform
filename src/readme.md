@@ -113,10 +113,11 @@
 ## Tear down kubeflow
     kubectl delete -f ingress.yaml
     kubectl delete -f alb.yaml
-    Detach 2 roles in eksctl-eksworkshop-eksctl-nodegro-NodeInstanceRole-
 
     cd manifests
     kubectl delete -k example
+
+    Detach 2 roles in eksctl-eksworkshop-eksctl-nodegro-NodeInstanceRole-
 
 ## Tear down clusters
     eksctl delete cluster --region=us-east-1 --name=eksworkshop-eksctl
