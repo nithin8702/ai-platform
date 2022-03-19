@@ -119,5 +119,7 @@
 
     Detach 2 roles in eksctl-eksworkshop-eksctl-nodegro-NodeInstanceRole-
 
+    Delete tags in subnets which we added manually
+
 ## Tear down clusters
     eksctl delete cluster --region=us-east-1 --name=eksworkshop-eksctl
