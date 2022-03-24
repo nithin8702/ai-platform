@@ -1,6 +1,7 @@
 ## Deploy kubernetes clusters
     minikube start --cpus 8 --memory 12000 --disk-size=250g --kubernetes-version=v1.21.10
 
+    https://eksctl.io/
     cd clusters
     eksctl create cluster -f eksworkshop.yaml
     Attach alb policy to eksctl-eksworkshop-eksctl-nodegro-NodeInstanceRole-
