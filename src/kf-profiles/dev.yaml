@@ -1,0 +1,9 @@
+# yamllint disable-file
+apiVersion: kubeflow.org/v1beta1
+kind: Profile
+metadata:
+  name: dev
+spec:
+  owner:
+    kind: User
+    name: aibench001@abc.com

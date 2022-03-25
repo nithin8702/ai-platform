@@ -98,6 +98,10 @@
 ## Kubeflow UI
     kubectl port-forward svc/istio-ingressgateway -n istio-system 8080:80
 
+    pip install passlib
+    pip install bcrypt
+    export HASH=$(python3 -c 'from passlib.hash import bcrypt; import getpass; print(bcrypt.using(rounds=12, ident="2y").hash(getpass.getpass()))')
+
 ## Ingress
     https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html
         kubernetes.io/cluster/eksworkshop-eksctl shared

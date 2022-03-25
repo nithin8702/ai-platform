@@ -1,0 +1,15 @@
+apiVersion: "kubeflow.org/v1alpha1"
+kind: PodDefault
+metadata:
+  name: pd-proxy
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      pd-proxy: "true"
+  desc: "regcred"
+  env:
+    - name: HTTP_PROXY
+      value: http://test.proxy.com
+    - name: HTTPS_PROXY
+      value: http://test.proxy.com

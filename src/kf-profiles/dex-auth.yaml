@@ -1,0 +1,75 @@
+apiVersion: v1
+data:
+  config.yaml: |
+    issuer: http://dex.auth.svc.cluster.local:5556/dex
+    storage:
+      type: kubernetes
+      config:
+        inCluster: true
+    web:
+      http: 0.0.0.0:5556
+    logger:
+      level: "debug"
+      format: text
+    oauth2:
+      skipApprovalScreen: true
+    enablePasswordDB: true
+    staticPasswords:
+    - email: user@example.com
+      hash: $2y$12$4K/VkmDd1q1Orb3xAt82zu8gk7Ad6ReFR4LCP9UeYE90NLiN9Df72
+      # https://github.com/dexidp/dex/pull/1601/commits
+      # FIXME: Use hashFromEnv instead
+      username: user
+      userID: "15841185641784"
+    - email: aibench001@abc.com
+      hash: $2b$10$5xPY.gtiI3cvpRfPBvkz4OphbtDVjtU0dn8Ke76lF0UgL/790uhpm
+      username: aibench001
+      userID: "15841185641013"
+    - email: aibench002@abc.com
+      hash: $2b$10$8VQCXw5vaYTIfn1IZY5cD.F4yPCAVrf4YaTO3e09yr6ybPNE.jkku
+      username: aibench002
+      userID: "15841185641014"
+    - email: aibench003@abc.com
+      hash: $2b$10$jYXmYwQY2.mmkAmmXgp5ce0070zVksxFvpg6NDYhylXzMZ5PWTUgS
+      username: aibench003
+      userID: "15841185641014"
+    - email: aibench004@abc.com
+      hash: $2b$10$MEAF0WVeNGLvHT.rK.X5KukGuXtO0EsZFYJoKZfOKUHmOnbZ4dzRK
+      username: aibench004
+      userID: "15841185641016"
+    - email: aibench005@abc.com
+      hash: $2b$10$uyCQmaWpRQ3YBo2mMx/oGusfx.VTvjItHe0/sk3LRSrDE3.91fCle
+      username: aibench005
+      userID: "15841185641017"
+    - email: aibench006@abc.com
+      hash: $2b$10$woLt53szo6nQZlztQ.GaQ.DiVFtraQIbuI5P5udMxEqfyyGeVAkxO
+      username: aibench006
+      userID: "15841185641018"
+    staticClients:
+    # https://github.com/dexidp/dex/pull/1664
+    - idEnv: OIDC_CLIENT_ID
+      redirectURIs: ["/login/oidc"]
+      name: 'Dex Login Application'
+      secretEnv: OIDC_CLIENT_SECRET
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"config.yaml":"issuer: http://dex.auth.svc.cluster.local:5556/dex\nstorage:\n  type: kubernetes\n  config:\n    inCluster: true\nweb:\n  http: 0.0.0.0:5556\nlogger:\n  level: \"debug\"\n  format: text\noauth2:\n  skipApprovalScreen: true\nenablePasswordDB: true\nstaticPasswords:\n- email: user@example.com\n  hash: $2y$12$4K/VkmDd1q1Orb3xAt82zu8gk7Ad6ReFR4LCP9UeYE90NLiN9Df72\n  # https://github.com/dexidp/dex/pull/1601/commits\n  # FIXME: Use hashFromEnv instead\n  username: user\n  userID: \"15841185641784\"\nstaticClients:\n# https://github.com/dexidp/dex/pull/1664\n- idEnv: OIDC_CLIENT_ID\n  redirectURIs: [\"/login/oidc\"]\n  name: 'Dex Login Application'\n  secretEnv: OIDC_CLIENT_SECRET\n"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"dex","namespace":"auth"}}
+  creationTimestamp: "2021-09-18T12:20:54Z"
+  managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:config.yaml: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+      manager: kubectl-client-side-apply
+      operation: Update
+      time: "2021-09-18T12:20:54Z"
+  name: dex
+  namespace: auth
