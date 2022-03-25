@@ -1,9 +1,6 @@
 FROM gcr.io/kubeflow-images-public/tensorflow-2.1.0-notebook-cpu:1.0.0
 
-RUN ls
-
 COPY . .
-# COPY requirements.txt /tmp
 
 RUN ls
 
@@ -11,7 +8,7 @@ USER root
 
 # RUN pip3 install --upgrade pip
 
-RUN pip3 install -r /tmp/requirements.txt
+RUN pip3 install -r src/custom-images/requirements.txt
 
 RUN pip uninstall -y enum34
 
