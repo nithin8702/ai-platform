@@ -102,6 +102,20 @@
     pip install bcrypt
     export HASH=$(python3 -c 'from passlib.hash import bcrypt; import getpass; print(bcrypt.using(rounds=12, ident="2y").hash(getpass.getpass()))')
 
+    kubectl get cm dex -n auth -o yaml > dex-auth.yaml
+    kubectl apply -f dex-auth.yaml
+    kubectl rollout restart deployment dex -n auth
+
+    kubectl get cm -n kubeflow
+    kubectl get cm jupyter-web-app-config-9d479bc4bk -n kubeflow -o yaml > jupyter-web-app.yaml
+
+    cd kf-profiles
+    kubectl apply -f dev.yaml
+
+    kubectl apply -f poddefault.yaml
+
+
+
 ## Ingress
     https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html
         kubernetes.io/cluster/eksworkshop-eksctl shared
