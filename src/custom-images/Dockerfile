@@ -2,7 +2,10 @@ FROM gcr.io/kubeflow-images-public/tensorflow-2.1.0-notebook-cpu:1.0.0
 
 RUN ls
 
-COPY requirements.txt /tmp
+COPY . .
+# COPY requirements.txt /tmp
+
+RUN ls
 
 USER root
 
