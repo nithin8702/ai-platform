@@ -4,6 +4,9 @@
     https://eksctl.io/
     cd clusters
     eksctl create cluster -f eksworkshop.yaml
+        CloudFormation
+            -> VPC, Subnets, IternetGateway, IAM Roles
+            -> EKS
     Attach alb policy to eksctl-eksworkshop-eksctl-nodegro-NodeInstanceRole-
 
 ## Validate clusters
