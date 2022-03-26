@@ -8,12 +8,33 @@ metadata:
   version: "1.19"
 availabilityZones: ['us-east-1a', 'us-east-1b', 'us-east-1c', 'us-east-1d', 'us-east-1f']
 
+
 nodeGroups:
-- name: nodegroup
+- name: nodegroup-cpu
+  instanceType: m5.large
   minSize: 4
   maxSize: 5
   desiredCapacity: 4
-  instanceType: m5.large
+  
+- name: nodegroup-gpu
+  instanceType: p2.xlarge
+  volumeSize: 50
+  minSize: 0
+  maxSize: 1
+  desiredCapacity: 0
+  tags:
+    "k8s.io/cluster-autoscaler/node-template/label/nodepool": "p2_xlarge"
+  labels:
+    "nodepool": "p2_xlarge"
+  taints:
+    p2_xlarge: "p2_xlarge:NoSchedule"
+
+# nodeGroups:
+# - name: nodegroup
+#   minSize: 4
+#   maxSize: 5
+#   desiredCapacity: 4
+#   instanceType: m5.large
   # ssh:
   #   publicKeyName: k8s
   #   enableSsm: true
