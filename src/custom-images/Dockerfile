@@ -17,13 +17,14 @@ COPY . .
 
 
 # ------------------------------------ Code Server ------------------------------------
+RUN ls
 FROM base AS codeserver
 EXPOSE 8888
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 WORKDIR /app
 USER ${NB_UID}
 RUN chmod u+x ./bootstrap_codeserver.sh
-ENTRYPOINT ["/app/bootstrap_codeserver.sh"]
+ENTRYPOINT ["/app/src/custom-images/bootstrap_codeserver.sh"]
 
 # ------------------------------------ Jupyter ------------------------------------
 FROM base AS jupyter
@@ -35,4 +36,4 @@ ENV NB_PREFIX /
 WORKDIR /app
 USER ${NB_UID}
 RUN chmod u+x ./bootstrap_jupyter.sh
-ENTRYPOINT ["/app/bootstrap_jupyter.sh"]
+ENTRYPOINT ["/app/src/custom-images/bootstrap_jupyter.sh"]
