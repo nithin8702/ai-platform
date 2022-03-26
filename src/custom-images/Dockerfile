@@ -1,16 +1,16 @@
 FROM ubuntu:latest as base
 
-RUN sudo apt-get update && sudo apt-get install --no-install-recommends --no-install-suggests -y curl
-RUN sudo apt-get -y install vim
-RUN sudo apt-get -y install python3
-RUN sudo apt-get -y install python3-pip
+RUN apt-get update && apt-get install --no-install-recommends --no-install-suggests -y curl
+RUN apt-get -y install vim
+RUN apt-get -y install python3
+RUN apt-get -y install python3-pip
 
-RUN sudo curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-RUN sudo chmod +x ./kubectl
-RUN sudo mv ./kubectl /usr/local/bin
+RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+RUN chmod +x ./kubectl
+RUN mv ./kubectl /usr/local/bin
 
 
-RUN sudo apt-get install git -y
+RUN apt-get install git -y
 
 WORKDIR /app
 COPY . .
