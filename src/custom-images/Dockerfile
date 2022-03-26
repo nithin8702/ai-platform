@@ -28,7 +28,7 @@ ENTRYPOINT ["/app/src/custom-images/bootstrap_codeserver.sh"]
 # ------------------------------------ Jupyter ------------------------------------
 FROM base AS jupyter
 RUN pip install jupyter -U && pip install jupyterlab
-RUN jupyter notebook --generate-config
+# RUN jupyter notebook --generate-config -y
 # RUN echo "c.NotebookApp.terminado_settings = {\"shell_command\": ['/bin/bash']}" | tee -a /home/ray/.jupyter/jupyter_notebook_config.py
 EXPOSE 8888
 ENV NB_PREFIX /
