@@ -1,0 +1,51 @@
+name: CI/CD for Kubeflow notebook images
+
+on:
+ 
+  push:
+    branches: [ main ]
+
+jobs:
+  
+  build:
+    
+    name: Build Image
+    runs-on: ubuntu-latest
+
+   
+    steps:
+
+    - name: Check out code
+      uses: actions/checkout@v2
+    
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Build Base image
+      run: |
+        git_hash=latest
+        docker build -t ubuntu:$git_hash . --file src/custom-images/Dockerfile
+        docker tag ubuntu:$git_hash 807582834527.dkr.ecr.us-east-1.amazonaws.com/ubuntu:$git_hash
+        docker push 807582834527.dkr.ecr.us-east-1.amazonaws.com/ubuntu:$git_hash
+
+    - name: Build CodeServer image
+      run: |
+        git_hash=latest
+        docker build -t codeserver:$git_hash . --target codeserver --file src/custom-images/Dockerfile
+        docker tag codeserver:$git_hash 807582834527.dkr.ecr.us-east-1.amazonaws.com/codeserver:$git_hash
+        docker push 807582834527.dkr.ecr.us-east-1.amazonaws.com/codeserver:$git_hash
+
+    - name: Build Jupyter image
+      run: |
+        git_hash=latest
+        docker build -t jupyter:$git_hash . --target jupyter --file src/custom-images/Dockerfile
+        docker tag jupyter:$git_hash 807582834527.dkr.ecr.us-east-1.amazonaws.com/jupyter:$git_hash
+        docker push 807582834527.dkr.ecr.us-east-1.amazonaws.com/jupyter:$git_hash

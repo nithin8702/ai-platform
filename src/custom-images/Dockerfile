@@ -1,21 +1,38 @@
-FROM gcr.io/kubeflow-images-public/tensorflow-2.1.0-notebook-cpu:1.0.0
+FROM ubuntu:latest as base
 
+RUN sudo apt-get update && sudo apt-get install --no-install-recommends --no-install-suggests -y curl
+RUN sudo apt-get -y install vim
+RUN sudo apt-get -y install python3
+RUN sudo apt-get -y install python3-pip
+
+RUN sudo curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+RUN sudo chmod +x ./kubectl
+RUN sudo mv ./kubectl /usr/local/bin
+
+
+RUN sudo apt-get install git -y
+
+WORKDIR /app
 COPY . .
 
-RUN ls
 
-USER root
+# ------------------------------------ Code Server ------------------------------------
+FROM base AS codeserver
+EXPOSE 8888
+RUN curl -fsSL https://code-server.dev/install.sh | sh
+WORKDIR /app
+USER ${NB_UID}
+RUN chmod u+x ./bootstrap_codeserver.sh
+ENTRYPOINT ["/app/bootstrap_codeserver.sh"]
 
-# RUN pip3 install --upgrade pip
-
-RUN pip3 install -r src/custom-images/requirements.txt
-
-RUN pip uninstall -y enum34
-
-RUN pip3 install kfp --upgrade
-
-USER ${NB_USER}
-    
+# ------------------------------------ Jupyter ------------------------------------
+FROM base AS jupyter
+RUN pip install jupyter -U && pip install jupyterlab
+RUN jupyter notebook --generate-config
+RUN echo "c.NotebookApp.terminado_settings = {\"shell_command\": ['/bin/bash']}" | tee -a /home/ray/.jupyter/jupyter_notebook_config.py
+EXPOSE 8888
 ENV NB_PREFIX /
-
-CMD ["sh","-c", "jupyter notebook --notebook-dir=/home/${NB_USER} --ip=0.0.0.0 --no-browser --allow-root --port=8888 --NotebookApp.token='' --NotebookApp.password='' --NotebookApp.allow_origin='*' --NotebookApp.base_url=${NB_PREFIX}"]
+WORKDIR /app
+USER ${NB_UID}
+RUN chmod u+x ./bootstrap_jupyter.sh
+ENTRYPOINT ["/app/bootstrap_jupyter.sh"]
