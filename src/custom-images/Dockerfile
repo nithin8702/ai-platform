@@ -17,7 +17,6 @@ COPY . .
 
 
 # ------------------------------------ Code Server ------------------------------------
-RUN ls
 FROM base AS codeserver
 EXPOSE 8888
 RUN curl -fsSL https://code-server.dev/install.sh | sh
@@ -30,7 +29,7 @@ ENTRYPOINT ["/app/src/custom-images/bootstrap_codeserver.sh"]
 FROM base AS jupyter
 RUN pip install jupyter -U && pip install jupyterlab
 RUN jupyter notebook --generate-config
-RUN echo "c.NotebookApp.terminado_settings = {\"shell_command\": ['/bin/bash']}" | tee -a /home/ray/.jupyter/jupyter_notebook_config.py
+# RUN echo "c.NotebookApp.terminado_settings = {\"shell_command\": ['/bin/bash']}" | tee -a /home/ray/.jupyter/jupyter_notebook_config.py
 EXPOSE 8888
 ENV NB_PREFIX /
 WORKDIR /app
