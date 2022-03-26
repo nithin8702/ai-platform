@@ -23,7 +23,7 @@ EXPOSE 8888
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 WORKDIR /app
 USER ${NB_UID}
-RUN chmod u+x ./bootstrap_codeserver.sh
+RUN chmod u+x src/custom-images/bootstrap_codeserver.sh
 ENTRYPOINT ["/app/src/custom-images/bootstrap_codeserver.sh"]
 
 # ------------------------------------ Jupyter ------------------------------------
@@ -35,5 +35,5 @@ EXPOSE 8888
 ENV NB_PREFIX /
 WORKDIR /app
 USER ${NB_UID}
-RUN chmod u+x ./bootstrap_jupyter.sh
+RUN chmod u+x src/custom-images/bootstrap_jupyter.sh
 ENTRYPOINT ["/app/src/custom-images/bootstrap_jupyter.sh"]
