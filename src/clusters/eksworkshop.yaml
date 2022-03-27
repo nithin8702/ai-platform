@@ -16,18 +16,18 @@ nodeGroups:
   maxSize: 5
   desiredCapacity: 4
   
-- name: nodegroup-gpu
-  instanceType: p2.xlarge
-  volumeSize: 50
-  minSize: 0
-  maxSize: 1
-  desiredCapacity: 0
-  tags:
-    "k8s.io/cluster-autoscaler/node-template/label/nodepool": "p2_xlarge"
-  labels:
-    "nodepool": "p2_xlarge"
-  taints:
-    p2_xlarge: "p2_xlarge:NoSchedule"
+# - name: nodegroup-gpu
+#   instanceType: p2.xlarge
+#   volumeSize: 50
+#   minSize: 0
+#   maxSize: 1
+#   desiredCapacity: 0
+#   tags:
+#     "k8s.io/cluster-autoscaler/node-template/label/nodepool": "p2_xlarge"
+#   labels:
+#     "nodepool": "p2_xlarge"
+#   taints:
+#     p2_xlarge: "p2_xlarge:NoSchedule"
 
 # nodeGroups:
 # - name: nodegroup
