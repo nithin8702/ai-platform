@@ -9,7 +9,7 @@ metadata:
 availabilityZones: ['us-east-1a', 'us-east-1b', 'us-east-1c', 'us-east-1d', 'us-east-1f']
 
 
-nodeGroups:
+managedNodeGroups:
 - name: nodegroup-cpu
   instanceType: m5.large
   minSize: 4
@@ -19,9 +19,9 @@ nodeGroups:
 # - name: nodegroup-gpu
 #   instanceType: p2.xlarge
 #   volumeSize: 50
-#   minSize: 0
-#   maxSize: 1
-#   desiredCapacity: 0
+#   minSize: 1
+#   maxSize: 2
+#   desiredCapacity: 1
 #   tags:
 #     "k8s.io/cluster-autoscaler/node-template/label/nodepool": "p2_xlarge"
 #   labels:
