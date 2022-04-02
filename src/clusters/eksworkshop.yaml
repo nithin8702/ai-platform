@@ -13,7 +13,7 @@ managedNodeGroups:
 - name: nodegroup-cpu
   instanceType: m5.large
   minSize: 4
-  maxSize: 5
+  maxSize: 10
   desiredCapacity: 4
   
 # - name: nodegroup-gpu
